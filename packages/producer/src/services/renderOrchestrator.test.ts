@@ -48,6 +48,7 @@ import {
   scanElementTags,
   envInt,
   isDeParallelRouterEnabled,
+  isWebGlRouteActive,
   mergeWorkerInitObservability,
   resolveCompositionElementCount,
   detectAdaptersStatic,
@@ -2758,6 +2759,9 @@ describe("shouldPreferSingleWorkerDrawElement (DE priority inversion)", () => {
   it("requires drawElement to be enabled and ungated", () => {
     expect(shouldPreferSingleWorkerDrawElement({ ...eligible, useDrawElement: false })).toBe(false);
     expect(shouldPreferSingleWorkerDrawElement({ ...eligible, deCompileGate: "3d" })).toBe(false);
+    expect(shouldPreferSingleWorkerDrawElement({ ...eligible, deCompileGate: "webgl" })).toBe(
+      false,
+    );
     expect(shouldPreferSingleWorkerDrawElement({ ...eligible, forceScreenshot: true })).toBe(false);
   });
 
@@ -2770,6 +2774,64 @@ describe("shouldPreferSingleWorkerDrawElement (DE priority inversion)", () => {
 
   it("is a no-op when workers already resolved to 1", () => {
     expect(shouldPreferSingleWorkerDrawElement({ ...eligible, workerCount: 1 })).toBe(false);
+  });
+
+  it("does not invert a WebGL composition of >= 900 frames to one worker (#5604)", () => {
+    // Compositions of >= 900 frames with WebGL must not invert to a single worker.
+    // They are routed via layeredOrEffectRoute (from isWebGlRouteActive) or deCompileGate,
+    // preserving multi-worker screenshot parallelism.
+    const webGlComp = {
+      ...eligible,
+      totalFrames: 900,
+      layeredOrEffectRoute: isWebGlRouteActive({ usesWebGl: true }),
+    };
+    expect(webGlComp.layeredOrEffectRoute).toBe(true);
+    expect(shouldPreferSingleWorkerDrawElement(webGlComp)).toBe(false);
+
+    // Also blocks when caught via runtime WebGL adapter hooks:
+    const adapterComp = {
+      ...eligible,
+      totalFrames: 900,
+      layeredOrEffectRoute: isWebGlRouteActive({ hasWebGlAdapter: true }),
+    };
+    expect(adapterComp.layeredOrEffectRoute).toBe(true);
+    expect(shouldPreferSingleWorkerDrawElement(adapterComp)).toBe(false);
+
+    // Bypass via HF_FAST_CAPTURE_WEBGL=true restores the old routing:
+    const bypassed = isWebGlRouteActive({
+      usesWebGl: true,
+      env: { HF_FAST_CAPTURE_WEBGL: "true" },
+    });
+    expect(bypassed).toBe(false);
+    expect(
+      shouldPreferSingleWorkerDrawElement({
+        ...eligible,
+        totalFrames: 900,
+        layeredOrEffectRoute: bypassed,
+      }),
+    ).toBe(true);
+  });
+});
+
+describe("isWebGlRouteActive", () => {
+  it("returns true when usesWebGl or hasWebGlAdapter is set and bypasses are not active", () => {
+    expect(isWebGlRouteActive({ usesWebGl: true, env: {} })).toBe(true);
+    expect(isWebGlRouteActive({ hasWebGlAdapter: true, env: {} })).toBe(true);
+    expect(isWebGlRouteActive({ usesWebGl: true, hasWebGlAdapter: true, env: {} })).toBe(true);
+  });
+
+  it("returns false when neither usesWebGl nor hasWebGlAdapter is set", () => {
+    expect(isWebGlRouteActive({ usesWebGl: false, hasWebGlAdapter: false, env: {} })).toBe(false);
+    expect(isWebGlRouteActive({ env: {} })).toBe(false);
+  });
+
+  it("returns false when bypassed by HF_FAST_CAPTURE_WEBGL=true or HF_FAST_CAPTURE_CSSFX=true", () => {
+    expect(isWebGlRouteActive({ usesWebGl: true, env: { HF_FAST_CAPTURE_WEBGL: "true" } })).toBe(
+      false,
+    );
+    expect(
+      isWebGlRouteActive({ hasWebGlAdapter: true, env: { HF_FAST_CAPTURE_CSSFX: "true" } }),
+    ).toBe(false);
   });
 });
 
@@ -2966,6 +3028,7 @@ describe("shouldPreferParallelDrawElement (DE parallel router)", () => {
   it("requires drawElement to be enabled and ungated", () => {
     expect(shouldPreferParallelDrawElement({ ...eligible, useDrawElement: false })).toBe(false);
     expect(shouldPreferParallelDrawElement({ ...eligible, deCompileGate: "3d" })).toBe(false);
+    expect(shouldPreferParallelDrawElement({ ...eligible, deCompileGate: "webgl" })).toBe(false);
     expect(shouldPreferParallelDrawElement({ ...eligible, forceScreenshot: true })).toBe(false);
   });
 

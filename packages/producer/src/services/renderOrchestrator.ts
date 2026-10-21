@@ -2734,6 +2734,25 @@ export function shouldDiscardProbeSessionForPageSideCompositing(args: {
 }
 
 /**
+ * True when a composition uses WebGL / accelerated canvas (either through
+ * runtime adapters or static compile analysis) and the R&D bypass flags
+ * are not active. Used to gate drawElement and block priority inversion
+ * so WebGL renders preserve multi-worker screenshot parallelism (#5604).
+ */
+export function isWebGlRouteActive(args: {
+  hasWebGlAdapter?: boolean;
+  usesWebGl?: boolean;
+  env?: Readonly<Record<string, string | undefined>>;
+}): boolean {
+  if (!args.hasWebGlAdapter && !args.usesWebGl) return false;
+  const env = args.env ?? process.env;
+  if (env.HF_FAST_CAPTURE_WEBGL === "true" || env.HF_FAST_CAPTURE_CSSFX === "true") {
+    return false;
+  }
+  return true;
+}
+
+/**
  * Main render pipeline
  */
 
@@ -3071,8 +3090,7 @@ async function executeRenderPipeline(input: {
     // `cfg.forceScreenshot` directly.
     let captureForceScreenshot = compileResult.forceScreenshot;
     // drawElement release telemetry: why default DE disengaged (if it did),
-    // whether self-verify fell back, and the drain-side counters.
-    const deCompileGate = compileResult.deCompileGate;
+    let deCompileGate = compileResult.deCompileGate;
     // Seed with the CONFIG-TIME refusal, if there was one. The clamp further
     // down only runs `if (cfg.useDrawElement && ...)`, so a render that never
     // became a drawElement candidate at all could never acquire a reason —
@@ -3639,8 +3657,33 @@ async function executeRenderPipeline(input: {
     // correlated populations, hardware). A plain before/after cannot
     // attribute a fleet perf shift to this change; this can.
     const deShortBandRoute = process.env.HF_DE_SHORT_BAND_ROUTE === "true";
-    // "Would ANY multi-worker resolution be inverted?" — if workers resolve
-    // to 1 naturally the outcome is identical either way.
+    const hasWebGlAdapter = adaptersUsed.some(
+      (a) => a === "three" || a === "typegpu" || a === "mapbox" || a === "maplibre",
+    );
+    // Runtime WebGL adapter gate: adaptersUsed comes from the compilation phase
+    // and reflects Three.js/TypeGPU/Mapbox/MapLibre adapter hooks resolved at
+    // runtime — a superset of what the static regex in compileStage catches.
+    // When triggered, disable drawElement and set the "webgl" gate label so
+    // downstream DE eligibility checks and telemetry see the gate.
+    const webGlGateActive = isWebGlRouteActive({
+      hasWebGlAdapter,
+      usesWebGl: compiled.usesWebGl,
+    });
+    if (cfg.useDrawElement && webGlGateActive && hasWebGlAdapter) {
+      cfg.useDrawElement = false;
+      deCompileGate = deCompileGate ?? "webgl";
+      // The probe session already initialized in drawElement mode (canvas
+      // injected); it must not be reused by the unverified path.
+      if (probeSession && probeSession.captureMode === "drawelement") {
+        lastBrowserConsole = probeSession.browserConsoleBuffer;
+        await closeCaptureSession(probeSession);
+        probeSession = null;
+      }
+      if (cfg.pageSideCompositingAutoDisabled) {
+        cfg.enablePageSideCompositing = true;
+        cfg.pageSideCompositingAutoDisabled = false;
+      }
+    }
     const WOULD_RESOLVE_MULTI_WORKER = 2;
     const deInversionArgs = {
       workerCount: WOULD_RESOLVE_MULTI_WORKER,
@@ -3652,7 +3695,7 @@ async function executeRenderPipeline(input: {
       totalFrames,
       minFrames: deSingleMinFrames,
       singleWorkerStreamingOk: shouldUseStreamingEncode(cfg, outputFormat, 1, job.duration),
-      layeredOrEffectRoute: hasHdrContent || compiled.hasShaderTransitions,
+      layeredOrEffectRoute: hasHdrContent || compiled.hasShaderTransitions || webGlGateActive,
       supersampling: deviceScaleFactor !== 1,
       probeDeGated: isProbeDeGated(probeSession),
       experimentalParallelDeOptIn:
@@ -3742,7 +3785,7 @@ async function executeRenderPipeline(input: {
       outputFormat,
       totalFrames,
       minFrames: deParallelMinFrames,
-      layeredOrEffectRoute: hasHdrContent || compiled.hasShaderTransitions,
+      layeredOrEffectRoute: hasHdrContent || compiled.hasShaderTransitions || webGlGateActive,
       supersampling: deviceScaleFactor !== 1,
       probeDeGated: isProbeDeGated(probeSession),
       experimentalParallelDeOptIn:
