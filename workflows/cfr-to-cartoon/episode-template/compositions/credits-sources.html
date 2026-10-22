@@ -1,0 +1,118 @@
+<template id="credits-sources-template">
+  <div
+    data-composition-id="%%COMP_ID%%"
+    data-width="1920"
+    data-height="1080"
+    style="position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0a08;"
+  >
+    <div id="cr-page">
+      <div id="cr-head">
+        <div id="cr-kicker">THE MINISTRY OF PEACE &middot; BULLETIN %%EP_NO%%</div>
+        <div id="cr-title">SOURCES &amp; FACTS USED</div>
+        <div id="cr-rule"></div>
+      </div>
+
+      <div id="cr-columns">
+        <div id="cr-left">
+          <div class="cr-label">ORIGINAL REPORTING</div>
+          <div id="cr-source-title">%%SOURCE_TITLE%%</div>
+          <div class="cr-meta">Council on Foreign Relations</div>
+          <div class="cr-meta">%%SOURCE_URL%%</div>
+          <div class="cr-meta">Retrieved %%RETRIEVED%%</div>
+
+          <div class="cr-label cr-label-gap">FACT LEDGER</div>
+          <div class="cr-meta">Every figure in this episode is quoted from the article above and checked against the ledger before animation.</div>
+
+          <div class="cr-label cr-label-gap">CAST</div>
+          <div class="cr-meta">The Anchor, The Clerk, The Map, The Ledger &mdash; fictional functionaries. No real person is depicted or impersonated.</div>
+
+          <div id="cr-disclaimer">SATIRE. FACTS CITED; JOKES INVENTED.</div>
+        </div>
+
+        <div id="cr-right">
+          <div class="cr-label">LEDGER ENTRIES REFERENCED</div>
+%%CREDITS_FACTS%%
+        </div>
+      </div>
+
+      <div id="cr-foot">
+        <span>ANIMATED WITH HYPERFRAMES &middot; OPEN SOURCE</span>
+        <span>NOT FOR BROADCAST WITHOUT HUMAN REVIEW</span>
+      </div>
+    </div>
+
+    <style>
+      [data-composition-id="%%COMP_ID%%"] #cr-page {
+        position: absolute; inset: 52px; border: 1px solid #2a251c;
+        padding: 58px 68px; background: #0b0a08;
+      }
+      [data-composition-id="%%COMP_ID%%"] #cr-kicker {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 18px; letter-spacing: 0.28em; color: #8c6a2f;
+      }
+      [data-composition-id="%%COMP_ID%%"] #cr-title {
+        margin-top: 12px;
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 58px; line-height: 1; color: #e8dfc8; text-transform: uppercase;
+      }
+      [data-composition-id="%%COMP_ID%%"] #cr-rule {
+        height: 2px; background: #a31616; margin-top: 22px; transform-origin: left center;
+      }
+      [data-composition-id="%%COMP_ID%%"] #cr-columns {
+        display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; margin-top: 34px;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-label {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 15px; letter-spacing: 0.26em; color: #a31616; margin-bottom: 10px;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-label-gap { margin-top: 26px; }
+      [data-composition-id="%%COMP_ID%%"] #cr-source-title {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 24px; line-height: 1.35; color: #e8dfc8; margin-bottom: 10px;
+        max-width: 760px;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-meta {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 17px; line-height: 1.55; color: #9a917c; margin-bottom: 4px;
+        max-width: 740px; word-break: break-word;
+      }
+      [data-composition-id="%%COMP_ID%%"] #cr-disclaimer {
+        margin-top: 30px;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 20px; letter-spacing: 0.1em; color: #e8dfc8;
+        border-left: 4px solid #a31616; padding-left: 16px;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-fact {
+        display: grid; grid-template-columns: 74px 1fr; gap: 18px;
+        padding: 9px 0; border-bottom: 1px solid #201c14;
+        font-family: "IBM Plex Mono", "Courier New", monospace; font-size: 16px;
+        line-height: 1.4; color: #e8dfc8;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-fact i {
+        font-style: normal; color: #a31616; letter-spacing: 0.06em;
+      }
+      [data-composition-id="%%COMP_ID%%"] .cr-fact b { font-weight: 600; color: #e8dfc8; }
+      [data-composition-id="%%COMP_ID%%"] .cr-fact em { font-style: normal; color: #9a917c; }
+      [data-composition-id="%%COMP_ID%%"] #cr-foot {
+        position: absolute; left: 68px; right: 68px; bottom: 42px;
+        display: flex; justify-content: space-between;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 14px; letter-spacing: 0.18em; color: #6f6857;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        tl.from("#cr-kicker", { opacity: 0, y: -10, duration: 0.3, ease: "power1.out" }, 0);
+        tl.from("#cr-title", { opacity: 0, x: -24, duration: 0.4, ease: "expo.out" }, 0.12);
+        tl.from("#cr-rule", { scaleX: 0, duration: 0.35, ease: "circ.inOut" }, 0.34);
+        tl.from("#cr-left", { opacity: 0, y: 18, duration: 0.45, ease: "power2.out" }, 0.5);
+        tl.from("#cr-right", { opacity: 0, y: 18, duration: 0.45, ease: "power2.out" }, 0.72);
+        tl.from("#cr-foot", { opacity: 0, duration: 0.3, ease: "none" }, 1.0);
+        window.__timelines["%%COMP_ID%%"] = tl;
+      })();
+    </script>
+  </div>
+</template>

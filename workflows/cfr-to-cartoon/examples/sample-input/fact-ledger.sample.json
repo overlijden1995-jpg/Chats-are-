@@ -1,0 +1,102 @@
+{
+  "source": {
+    "outlet": "Council on Foreign Relations",
+    "title": "The Ceasefire That Wasn't: Managed Escalation in the Sample Republic [SAMPLE — INVENTED ARTICLE]",
+    "url": "https://example.invalid/sample/ceasefire-that-wasnt",
+    "author": "Sample Author",
+    "published": "2026-09-30",
+    "retrieved_at": "2026-10-22"
+  },
+  "facts": [
+    {
+      "id": "F-001",
+      "kind": "statistic",
+      "claim": "4.2 million people require humanitarian assistance, according to aid figures cited in the article.",
+      "value": "4.2 million",
+      "unit": "people",
+      "as_of": "September 2026",
+      "excerpt": "Roughly 4.2 million people now require humanitarian assistance, according to aid figures cited in the report.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-002",
+      "kind": "statistic",
+      "claim": "Cross-border shelling incidents rose from 210 to 1,140 in eleven months.",
+      "value": "1,140",
+      "unit": "incidents",
+      "as_of": "September 2026",
+      "excerpt": "Cross-border shelling incidents rose from 210 to 1,140 in the eleven months since the agreement was signed.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-003",
+      "kind": "claim",
+      "claim": "The ministry describes the offensive as a 'special stabilization operation.'",
+      "excerpt": "The ministry describes the offensive as a special stabilization operation.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-004",
+      "kind": "statistic",
+      "claim": "Aid convoys fell to 38 per month, down from 120.",
+      "value": "38",
+      "unit": "convoys per month",
+      "as_of": "September 2026",
+      "excerpt": "Aid convoys fell to 38 per month, down from 120 a year earlier.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-005",
+      "kind": "date",
+      "claim": "The latest ceasefire expired on 14 March.",
+      "value": "14 March",
+      "excerpt": "The latest ceasefire expired on 14 March and was never formally renewed.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-006",
+      "kind": "statistic",
+      "claim": "Military spending reached $9.6 billion, roughly 11 percent of the national budget.",
+      "value": "$9.6 billion",
+      "unit": "11 percent of budget",
+      "as_of": "2026",
+      "excerpt": "Military spending reached $9.6 billion this year, roughly 11 percent of the national budget.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-007",
+      "kind": "claim",
+      "claim": "Officials say the border has been 'improved,' not moved.",
+      "excerpt": "Officials insist the border has been improved, not moved.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-008",
+      "kind": "quote",
+      "claim": "A deputy minister said: 'Nothing has changed.'",
+      "value": "Nothing has changed.",
+      "excerpt": "\"Nothing has changed,\" the deputy minister said.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-009",
+      "kind": "statistic",
+      "claim": "Only 6 percent of pledged reconstruction funds had been disbursed.",
+      "value": "6 percent",
+      "unit": "of pledged funds",
+      "as_of": "September 2026",
+      "excerpt": "Only 6 percent of pledged reconstruction funds had been disbursed by the end of the quarter.",
+      "confidence": "confirmed"
+    },
+    {
+      "id": "F-010",
+      "kind": "statistic",
+      "claim": "27,000 people were displaced in the last quarter.",
+      "value": "27,000",
+      "unit": "people",
+      "as_of": "Q3 2026",
+      "excerpt": "The article counts 27,000 displaced people in the last quarter alone.",
+      "confidence": "confirmed"
+    }
+  ]
+}

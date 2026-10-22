@@ -1,0 +1,100 @@
+---
+title: CFR → Cartoon workflow
+description: "Turn a Council on Foreign Relations conflict article into a fact-checked grimdark satire cartoon."
+---
+
+# CFR → Cartoon: satirical episodes from real reporting
+
+`workflows/cfr-to-cartoon/` is an end-to-end, open-source workflow that turns
+one Council on Foreign Relations (CFR) article about a real conflict into a
+45–90 second animated black-comedy episode — an Orwellian "Ministry of Peace"
+bulletin in which **the statistics are real and the euphemisms are the joke**.
+
+Almost every step is deterministic code or a JSON contract, so an agent can
+run the whole thing and a human can audit every figure.
+
+## The rule
+
+**Facts cited; jokes invented. Never the reverse.**
+
+Every number, date, and quote on screen traces to a confirmed entry in a fact
+ledger. Every scene in the script cites the ledger IDs it uses. The validator
+fails the build on an uncited number the same way a compiler fails on a type
+error.
+
+## Pipeline
+
+```
+CFR URL or saved text
+  └─① fetch_cfr.py        → source/article.json
+      └─② extract_stats.py → data/fact-ledger.json   🚦 Gate 1: human confirms
+          └─③ agent writes → data/script.json
+              └─④ validate_script.py
+                  └─⑤ build_episode.py → episodes/<slug>/ (Hyperframes project)
+                      └─⑥ Piper TTS + whisper.cpp captions
+                          └─⑦ hyperframes lint → render → 🚦 Gate 2: human approves
+```
+
+Stage files are plain JSON, so any step can be re-run, inspected, or replaced
+without touching the others.
+
+## Try the sample
+
+The bundled sample uses a clearly labelled **invented** article so the
+pipeline can be exercised offline:
+
+```bash Terminal
+python3 workflows/cfr-to-cartoon/scripts/build_episode.py \
+  --script workflows/cfr-to-cartoon/examples/sample-input/script.sample.json \
+  --ledger workflows/cfr-to-cartoon/examples/sample-input/fact-ledger.sample.json \
+  --out workflows/cfr-to-cartoon/episodes/the-ceasefire-that-wasnt
+```
+
+Then preview the result:
+
+```bash Terminal
+cd workflows/cfr-to-cartoon/episodes/the-ceasefire-that-wasnt
+npx hyperframes preview      # newer CLI releases
+npx hyperframes dev          # the command this repo's docs use
+```
+
+Render with `npx hyperframes render`. FFmpeg and Chrome are required; see
+[Rendering](/guides/rendering).
+
+## Cast and look
+
+The art direction is fixed in `workflows/cfr-to-cartoon/templates/visual-style.md`
+and the cast in `workflows/cfr-to-cartoon/templates/characters.md`: The Anchor (a telescreen headline,
+no face), The Clerk (hands and a stamp), The Map (borders that creep when
+unobserved), The Ledger (a counting room that is never funny), and The Chorus
+of Communiqués. Palette: ash, bone, stamp red, telescreen green-grey, brass.
+Facts always appear in monospace; propaganda in condensed display type. That
+distinction is both a running gag and a fact-checking aid.
+
+## Open-source stack
+
+| Stage | Tool | Licence |
+|---|---|---|
+| Ingest & stat extraction | Python 3 stdlib scripts | PSF |
+| Script, storyboard, composition | Your coding agent + the `cfr-cartoon` skill | MIT |
+| Animation | GSAP + Hyperframes | GSAP standard / MIT |
+| Voice | Piper TTS (local, offline) | MIT |
+| Captions | whisper.cpp via `hyperframes transcribe` | MIT |
+| Render | Hyperframes engine + FFmpeg | MIT / LGPL·GPL |
+
+No proprietary API is required at any stage.
+
+## Editorial guardrails
+
+- Punch at institutions, euphemisms, procedures, and arithmetic — never at
+  victims or protected groups.
+- Fictional cast only; real people appear solely as attributed, documented
+  quotations shown on screen.
+- Summarise and cite; do not republish the source article. Credits always
+  carry the CFR title, URL, and retrieval date.
+- Two human gates: ledger confirmation before scripting, final-cut approval
+  before anything is published. The agent never publishes.
+
+Read the full operator's guide in
+`workflows/cfr-to-cartoon/WORKFLOW.md` and the stage prompts in
+`workflows/cfr-to-cartoon/prompts/`.

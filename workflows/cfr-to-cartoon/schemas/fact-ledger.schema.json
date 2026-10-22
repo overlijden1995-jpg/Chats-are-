@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cfr-cartoon/fact-ledger.schema.json",
+  "title": "Fact Ledger — verified claims extracted from one CFR article",
+  "type": "object",
+  "required": ["source", "facts"],
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "type": "object",
+      "required": ["outlet", "title", "retrieved_at"],
+      "additionalProperties": false,
+      "properties": {
+        "outlet": { "const": "Council on Foreign Relations" },
+        "title": { "type": "string", "minLength": 1 },
+        "url": { "type": "string" },
+        "author": { "type": "string" },
+        "published": { "type": "string" },
+        "retrieved_at": { "type": "string", "minLength": 4 }
+      }
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "claim", "excerpt", "confidence"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^F-[0-9]{3,}$" },
+          "kind": {
+            "enum": ["statistic", "date", "actor", "place", "quote", "claim"]
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 8,
+            "description": "One neutral sentence a fact-checker would sign."
+          },
+          "value": { "type": "string" },
+          "unit": { "type": "string" },
+          "as_of": { "type": "string" },
+          "excerpt": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Verbatim sentence from the article. Never edited."
+          },
+          "confidence": { "enum": ["candidate", "confirmed"] }
+        }
+      }
+    }
+  }
+}

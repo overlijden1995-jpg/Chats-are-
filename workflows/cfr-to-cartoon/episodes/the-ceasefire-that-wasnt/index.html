@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>The Ceasefire That Wasn't</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px; height: 1080px; overflow: hidden;
+        background: #0b0a08;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+      }
+      #main-composition {
+        position: relative; width: 1920px; height: 1080px; overflow: hidden;
+        background: #0b0a08;
+      }
+      #scene-layer > div {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+      }
+      #captions-layer { position: absolute; inset: 0; pointer-events: none; }
+      /* Global grain + vignette, drawn above scenes, below captions */
+      #grain-layer {
+        position: absolute; inset: 0; z-index: 90; pointer-events: none;
+        opacity: 0.06;
+        background-image: radial-gradient(#e8dfc8 0.6px, transparent 0.7px);
+        background-size: 4px 4px;
+      }
+      #vignette-layer {
+        position: absolute; inset: 0; z-index: 91; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 45%, rgba(5,4,3,0.82) 100%);
+      }
+      #fade-layer {
+        position: absolute; inset: 0; z-index: 95; pointer-events: none;
+        background: #000; opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-1tb6"
+      id="main-composition"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="52.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div data-hf-id="hf-72af" id="scene-layer">
+        <div data-hf-id="hf-opfp" id="cold-open-1" data-composition-id="cold-open-1" data-composition-src="compositions/cold-open-1.html" data-start="0" data-duration="4.5" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+        <div data-hf-id="hf-gi38" id="ministry-anchor-2" data-composition-id="ministry-anchor-2" data-composition-src="compositions/ministry-anchor-2.html" data-start="4.5" data-duration="11" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+        <div data-hf-id="hf-xirp" id="map-room-3" data-composition-id="map-room-3" data-composition-src="compositions/map-room-3.html" data-start="15.5" data-duration="10" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+        <div data-hf-id="hf-j3hw" id="the-ledger-4" data-composition-id="the-ledger-4" data-composition-src="compositions/the-ledger-4.html" data-start="25.5" data-duration="12" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+        <div data-hf-id="hf-mgrh" id="the-stamp-5" data-composition-id="the-stamp-5" data-composition-src="compositions/the-stamp-5.html" data-start="37.5" data-duration="8" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+        <div data-hf-id="hf-4kzm" id="credits-sources-6" data-composition-id="credits-sources-6" data-composition-src="compositions/credits-sources-6.html" data-start="45.5" data-duration="7" data-width="1920" data-height="1080" data-track-index="10" style="position:absolute;inset:0;z-index:10"></div>
+      </div>
+
+      <div data-hf-id="hf-gkgt" id="captions" data-composition-id="captions" data-timeline-role="captions" data-caption-root="true" data-track-kind="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="52.5" data-width="1920" data-height="1080" data-track-index="50" style="position:absolute;inset:0;z-index:92"></div>
+
+      <div data-hf-id="hf-3wva" id="grain-layer"></div>
+      <div data-hf-id="hf-3t1f" id="vignette-layer"></div>
+      <div data-hf-id="hf-7fx7" id="fade-layer"></div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          const fade = document.getElementById("fade-layer");
+          const grain = document.getElementById("grain-layer");
+          // Grain jitter is GSAP-driven (steps) so every seek renders identically.
+          tl.to(grain, {
+            backgroundPosition: "2px 1px",
+            duration: 0.2,
+            repeat: Math.ceil(52.5 / 0.2),
+            yoyo: true,
+            ease: "steps(2)",
+          }, 0);
+          // Open from black, close on black before the last beat.
+          tl.fromTo(fade, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.out" }, 0);
+          tl.to(fade, { opacity: 1, duration: 0.35, ease: "none" }, Math.max(0.1, 52.5 - 0.4));
+          window.__timelines["main"] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

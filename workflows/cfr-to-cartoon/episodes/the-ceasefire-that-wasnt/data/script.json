@@ -1,0 +1,74 @@
+{
+  "episode": {
+    "slug": "the-ceasefire-that-wasnt",
+    "title": "The Ceasefire That Wasn't",
+    "series": "The Ministry of Peace",
+    "target_duration_s": 55
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "composition": "cold-open",
+      "duration_s": 4.5,
+      "pure_satire": true,
+      "lines": [{ "speaker": "ANCHOR", "text": "Good evening. The war is on schedule." }],
+      "fact_ids": []
+    },
+    {
+      "id": "bulletin",
+      "composition": "ministry-anchor",
+      "duration_s": 11,
+      "headline": "Ceasefire Enters Second Triumphant Year",
+      "euphemism": "\u201cThe border has been improved, not moved.\u201d",
+      "lines": [
+        { "speaker": "ANCHOR", "text": "The stabilization is proceeding exactly as unplanned." },
+        { "speaker": "ANCHOR", "text": "Officials describe the operation as special, and stabilization as ongoing." },
+        { "speaker": "ANCHOR", "text": "Both descriptions have been approved for broadcast." }
+      ],
+      "fact_ids": ["F-003", "F-007"]
+    },
+    {
+      "id": "map",
+      "composition": "map-room",
+      "duration_s": 10,
+      "headline": "The Border Has Been Improved",
+      "lines": [
+        { "speaker": "NONE", "text": "The situation is unchanged. It has merely changed 1,140 times." }
+      ],
+      "fact_ids": ["F-002", "F-007", "F-008"]
+    },
+    {
+      "id": "ledger",
+      "composition": "the-ledger",
+      "duration_s": 12,
+      "headline": "The Numbers, As Recorded",
+      "euphemism": "Read without inflection.",
+      "lines": [
+        { "speaker": "LEDGER", "text": "4.2 million people require humanitarian assistance." },
+        { "speaker": "LEDGER", "text": "Aid convoys: 38 per month." },
+        { "speaker": "LEDGER", "text": "Reconstruction funds disbursed: 6 percent." }
+      ],
+      "fact_ids": ["F-001", "F-004", "F-009"]
+    },
+    {
+      "id": "stamp",
+      "composition": "the-stamp",
+      "duration_s": 8,
+      "headline": "The Ceasefire, Processed",
+      "stamp": "APPROVED",
+      "lines": [
+        { "speaker": "CLERK", "text": "The ceasefire has been approved for expiry." },
+        { "speaker": "CLERK", "text": "In triplicate. File copy destroyed after reading." }
+      ],
+      "fact_ids": ["F-005"]
+    },
+    {
+      "id": "credits",
+      "composition": "credits-sources",
+      "duration_s": 7,
+      "pure_satire": true,
+      "lines": [{ "speaker": "ANCHOR", "text": "The facts above are real. The Ministry is not." }],
+      "fact_ids": []
+    }
+  ]
+}
