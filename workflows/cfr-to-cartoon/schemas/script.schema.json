@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cfr-cartoon/script.schema.json",
+  "title": "Satire Script — scenes citing the fact ledger",
+  "type": "object",
+  "required": ["episode", "scenes"],
+  "additionalProperties": false,
+  "properties": {
+    "episode": {
+      "type": "object",
+      "required": ["slug", "title", "target_duration_s"],
+      "additionalProperties": false,
+      "properties": {
+        "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "title": { "type": "string", "minLength": 3 },
+        "series": { "const": "The Ministry of Peace" },
+        "target_duration_s": { "type": "number", "minimum": 20, "maximum": 180 }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "composition", "duration_s", "lines", "fact_ids"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "composition": {
+            "enum": [
+              "cold-open",
+              "ministry-anchor",
+              "map-room",
+              "the-ledger",
+              "the-stamp",
+              "credits-sources"
+            ]
+          },
+          "duration_s": { "type": "number", "minimum": 2, "maximum": 40 },
+          "pure_satire": {
+            "type": "boolean",
+            "default": false,
+            "description": "True only if the scene contains no numbers, dates or quotes — it must then cite no facts and state none."
+          },
+          "headline": { "type": "string" },
+          "euphemism": { "type": "string" },
+          "stamp": { "enum": ["APPROVED", "DENIED", "PEACE", "FILED", ""] },
+          "lines": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["speaker", "text"],
+              "additionalProperties": false,
+              "properties": {
+                "speaker": {
+                  "enum": ["ANCHOR", "CLERK", "CHORUS", "LEDGER", "NONE"]
+                },
+                "text": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "fact_ids": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^F-[0-9]{3,}$" },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

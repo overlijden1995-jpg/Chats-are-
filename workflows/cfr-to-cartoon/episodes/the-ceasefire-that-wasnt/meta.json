@@ -1,0 +1,21 @@
+{
+  "name": "The Ceasefire That Wasn't",
+  "slug": "the-ceasefire-that-wasnt",
+  "series": "The Ministry of Peace",
+  "episode_no": "0001",
+  "duration_s": 52.5,
+  "facts_cited": [
+    "F-001",
+    "F-002",
+    "F-003",
+    "F-004",
+    "F-005",
+    "F-007",
+    "F-008",
+    "F-009"
+  ],
+  "source_title": "The Ceasefire That Wasn't: Managed Escalation in the Sample Republic [SAMPLE \u2014 INVENTED ARTICLE]",
+  "source_url": "https://example.invalid/sample/ceasefire-that-wasnt",
+  "retrieved_at": "2026-10-22",
+  "voice": "pending"
+}

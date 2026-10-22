@@ -1,0 +1,123 @@
+<template id="map-room-template">
+  <div data-hf-id="hf-brpc"
+    data-composition-id="map-room-3"
+    data-width="1920"
+    data-height="1080"
+    style="position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0a08;"
+  >
+    <div data-hf-id="hf-cpod" id="mr-grid"></div>
+
+    <svg data-hf-id="hf-x0in" id="mr-map" viewBox="0 0 1920 1080" width="1920" height="1080" aria-hidden="true">
+      <g data-hf-id="hf-pq5v" id="mr-zone-a">
+        <polygon data-hf-id="hf-tlbc"
+          points="330,250 760,210 860,430 700,560 380,520 285,380"
+          fill="#7a8b7f" fill-opacity="0.14" stroke="#7a8b7f" stroke-width="2"
+        />
+        <text data-hf-id="hf-jige" x="430" y="400" class="mr-label">ZONE OF STABILITY</text>
+      </g>
+      <g data-hf-id="hf-euo8" id="mr-zone-b">
+        <polygon data-hf-id="hf-0k3o"
+          points="900,300 1320,240 1500,420 1400,620 1040,650 880,500"
+          fill="#a31616" fill-opacity="0.10" stroke="#a31616" stroke-width="2"
+        />
+        <text data-hf-id="hf-b6ts" x="1040" y="470" class="mr-label mr-label-red">TEMPORARY MEASURE</text>
+      </g>
+      <polygon data-hf-id="hf-2413"
+        points="1180,700 1560,660 1700,820 1520,940 1200,900"
+        fill="none" stroke="#9a917c" stroke-width="2" stroke-dasharray="14 12"
+      />
+      <text data-hf-id="hf-iuqd" x="1280" y="800" class="mr-label mr-label-dim">FORMERLY ZONE OF STABILITY</text>
+
+      <line data-hf-id="hf-qo5e" id="mr-border" x1="860" y1="210" x2="900" y2="950" stroke="#e8dfc8" stroke-width="3" stroke-dasharray="18 14" />
+      <circle data-hf-id="hf-fctp" cx="880" cy="560" r="9" fill="none" stroke="#a31616" stroke-width="3" />
+      <line data-hf-id="hf-0mw7" x1="880" y1="470" x2="880" y2="650" stroke="#a31616" stroke-width="1" />
+      <line data-hf-id="hf-o7or" x1="790" y1="560" x2="970" y2="560" stroke="#a31616" stroke-width="1" />
+    </svg>
+
+    <div data-hf-id="hf-96gu" id="mr-header">
+      <div data-hf-id="hf-poei" id="mr-kicker">SITUATION MAP &middot; NOT TO SCALE &middot; NOT TO FACT</div>
+      <div data-hf-id="hf-xm28" id="mr-title">The Border Has Been Improved</div>
+    </div>
+
+    <div data-hf-id="hf-ovpc" id="mr-labels">
+        <div data-hf-id="hf-8diq" class="mr-note"><b data-hf-id="hf-6roq">F-002</b> 1,140</div>
+        <div data-hf-id="hf-2674" class="mr-note"><b data-hf-id="hf-7ylt">F-007</b> Officials say the border has been 'improved,' not moved.</div>
+        <div data-hf-id="hf-p2x7" class="mr-note"><b data-hf-id="hf-aqr0">F-008</b> Nothing has changed.</div>
+    </div>
+
+    <div data-hf-id="hf-amvi" id="mr-caption">The situation is unchanged. It has merely changed 1,140 times. <span data-hf-id="hf-45ft" style="color:#a31616">F-002</span> <span data-hf-id="hf-2yiq" style="color:#a31616">F-007</span> <span data-hf-id="hf-1rln" style="color:#a31616">F-008</span></div>
+
+    <div data-hf-id="hf-gsfh" id="mr-stamp-mark">VERIFIED BY THE DEPARTMENT OF CARTOGRAPHY</div>
+
+    <style>
+      [data-composition-id="map-room-3"] #mr-grid {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(122, 139, 127, 0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(122, 139, 127, 0.08) 1px, transparent 1px);
+        background-size: 120px 120px;
+      }
+      [data-composition-id="map-room-3"] #mr-map {
+        position: absolute; inset: 0;
+      }
+      [data-composition-id="map-room-3"] .mr-label {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 19px; letter-spacing: 0.16em; fill: #9a917c;
+      }
+      [data-composition-id="map-room-3"] .mr-label-red { fill: #a31616; }
+      [data-composition-id="map-room-3"] .mr-label-dim { fill: #6f6857; }
+      [data-composition-id="map-room-3"] #mr-header {
+        position: absolute; top: 74px; left: 84px; z-index: 10;
+      }
+      [data-composition-id="map-room-3"] #mr-kicker {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 20px; letter-spacing: 0.26em; color: #8c6a2f; margin-bottom: 16px;
+      }
+      [data-composition-id="map-room-3"] #mr-title {
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 68px; line-height: 1; color: #e8dfc8; text-transform: uppercase;
+        max-width: 980px;
+      }
+      [data-composition-id="map-room-3"] #mr-labels {
+        position: absolute; right: 84px; top: 330px; z-index: 10;
+        width: 420px; text-align: right;
+      }
+      [data-composition-id="map-room-3"] .mr-note {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 20px; line-height: 1.5; color: #9a917c;
+        border-right: 2px solid #2a251c; padding-right: 16px; margin-bottom: 16px;
+      }
+      [data-composition-id="map-room-3"] .mr-note b { color: #e8dfc8; font-weight: 600; }
+      [data-composition-id="map-room-3"] #mr-caption {
+        position: absolute; left: 84px; bottom: 92px; z-index: 10;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 24px; line-height: 1.5; color: #e8dfc8; max-width: 1240px;
+        border-left: 4px solid #a31616; padding-left: 20px;
+      }
+      [data-composition-id="map-room-3"] #mr-stamp-mark {
+        position: absolute; right: 84px; bottom: 92px; z-index: 10;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 16px; letter-spacing: 0.2em; color: #6f6857;
+        transform: rotate(-2deg);
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        tl.from("#mr-grid", { opacity: 0, duration: 0.5, ease: "power1.out" }, 0);
+        tl.from("#mr-map", { opacity: 0, duration: 0.6, ease: "power1.out" }, 0.1);
+        tl.from("#mr-kicker", { opacity: 0, x: -20, duration: 0.3, ease: "power1.out" }, 0.25);
+        tl.from("#mr-title", { opacity: 0, y: -18, duration: 0.4, ease: "power2.out" }, 0.4);
+        tl.from("#mr-labels", { opacity: 0, x: 26, duration: 0.45, ease: "power2.out" }, 0.6);
+        tl.from("#mr-caption", { opacity: 0, y: 16, duration: 0.4, ease: "power1.out" }, 0.85);
+        tl.from("#mr-stamp-mark", { opacity: 0, duration: 0.35, ease: "none" }, 1.1);
+        // The border creeps only when nobody is looking at it directly.
+        tl.to("#mr-border", { x: 26, duration: 10 - 1.6, ease: "sine.inOut" }, 1.4);
+        tl.to("#mr-zone-b", { x: 18, y: -8, duration: 10 - 1.8, ease: "sine.inOut" }, 1.5);
+        window.__timelines["map-room-3"] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -1,0 +1,12 @@
+# Working files that must not be committed:
+# source/article.* holds third-party article text (working copy only),
+# renders and voice assets are build output.
+*/source/
+*/capture/
+*/out/
+*/assets/voices/
+*.mp4
+*.webm
+
+# Studio build cache
+.hyperframes/

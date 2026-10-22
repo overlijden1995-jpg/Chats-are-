@@ -108,6 +108,27 @@ npx skills add greensock/gsap-skills
 
 In Claude Code, invoke with `/hyperframes-compose`, `/hyperframes-captions`, `/gsap-core`, etc.
 
+
+## Workflows
+
+### CFR → Cartoon
+
+[`workflows/cfr-to-cartoon/`](workflows/cfr-to-cartoon/README.md) turns a
+Council on Foreign Relations conflict article into a grimdark Orwellian
+satirical cartoon — 45–90 seconds of deadpan black comedy where **the
+statistics are real and the euphemisms are the joke**.
+
+It is a fully open-source agent pipeline: stdlib Python ingests the article
+and drafts a fact ledger, a human confirms every fact, an agent writes a
+script that cites the ledger, a validator fails the build on any uncited
+number, and a tokenised Hyperframes project renders the episode. Voice is
+Piper (MIT), captions are whisper.cpp, and the agent stops for human approval
+before anything is published.
+
+Start with the [workflow README](workflows/cfr-to-cartoon/README.md), or read
+the [docs guide](docs/guides/cfr-cartoon-workflow.mdx). The matching agent
+skill lives at [`skills/cfr-cartoon`](skills/cfr-cartoon/SKILL.md).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.

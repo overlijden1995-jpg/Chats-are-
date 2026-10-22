@@ -1,0 +1,99 @@
+<template id="cold-open-template">
+  <div data-hf-id="hf-tomr"
+    data-composition-id="cold-open-1"
+    data-width="1920"
+    data-height="1080"
+    style="position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0a08;"
+  >
+    <div data-hf-id="hf-q65e" id="co-flash"></div>
+    <div data-hf-id="hf-oas3" id="co-frame">
+      <div data-hf-id="hf-oii9" class="co-bolt co-bolt-tl"></div>
+      <div data-hf-id="hf-b8bz" class="co-bolt co-bolt-tr"></div>
+      <div data-hf-id="hf-uvt3" class="co-bolt co-bolt-bl"></div>
+      <div data-hf-id="hf-pas9" class="co-bolt co-bolt-br"></div>
+
+      <div data-hf-id="hf-tdkw" id="co-body">
+        <div data-hf-id="hf-ms2u" id="co-series">THE MINISTRY OF PEACE</div>
+        <div data-hf-id="hf-sm2k" id="co-bulletin">BULLETIN No. 0001 &middot; RETRIEVED 2026-10-22</div>
+        <div data-hf-id="hf-cvq7" id="co-title">The Ceasefire That Wasn't</div>
+        <div data-hf-id="hf-ithy" id="co-rule"></div>
+        <div data-hf-id="hf-pgaf" id="co-disclaimer">SATIRE. FACTS CITED; JOKES INVENTED.</div>
+        <div data-hf-id="hf-idum" id="co-standby">PLEASE STAND BY</div>
+      </div>
+    </div>
+
+    <style>
+      [data-composition-id="cold-open-1"] #co-flash {
+        position: absolute; inset: 0; background: #e8dfc8; z-index: 30;
+      }
+      [data-composition-id="cold-open-1"] #co-frame {
+        position: absolute; inset: 48px;
+        border: 3px solid #2a251c;
+        background: radial-gradient(ellipse at 50% 45%, #14120e 0%, #0b0a08 78%);
+        box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.9);
+        z-index: 10;
+      }
+      [data-composition-id="cold-open-1"] .co-bolt {
+        position: absolute; width: 10px; height: 10px; border-radius: 50%;
+        background: #8c6a2f; opacity: 0.45;
+      }
+      [data-composition-id="cold-open-1"] .co-bolt-tl { top: 14px; left: 14px; }
+      [data-composition-id="cold-open-1"] .co-bolt-tr { top: 14px; right: 14px; }
+      [data-composition-id="cold-open-1"] .co-bolt-bl { bottom: 14px; left: 14px; }
+      [data-composition-id="cold-open-1"] .co-bolt-br { bottom: 14px; right: 14px; }
+      [data-composition-id="cold-open-1"] #co-body {
+        position: absolute; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 26px;
+        padding: 0 120px; text-align: center;
+      }
+      [data-composition-id="cold-open-1"] #co-series {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 26px; letter-spacing: 0.42em; color: #9a917c;
+        padding-left: 0.42em;
+      }
+      [data-composition-id="cold-open-1"] #co-bulletin {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 22px; letter-spacing: 0.16em; color: #8c6a2f;
+      }
+      [data-composition-id="cold-open-1"] #co-title {
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 104px; line-height: 0.94; letter-spacing: -0.01em;
+        color: #e8dfc8; text-transform: uppercase; max-width: 1500px;
+      }
+      [data-composition-id="cold-open-1"] #co-rule {
+        width: 520px; height: 2px; background: #a31616; transform-origin: center;
+      }
+      [data-composition-id="cold-open-1"] #co-disclaimer {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 24px; letter-spacing: 0.08em; color: #e8dfc8;
+      }
+      [data-composition-id="cold-open-1"] #co-standby {
+        position: absolute; bottom: 54px; right: 62px;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 20px; letter-spacing: 0.3em; color: #7a8b7f;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#co-flash", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power4.out" }, 0);
+        tl.from("#co-series", { opacity: 0, y: -14, duration: 0.4, ease: "power2.out" }, 0.18);
+        tl.from("#co-bulletin", { opacity: 0, x: -22, duration: 0.35, ease: "power2.out" }, 0.34);
+        tl.from("#co-title", { opacity: 0, scale: 1.08, duration: 0.55, ease: "expo.out" }, 0.5);
+        tl.from("#co-rule", { scaleX: 0, duration: 0.42, ease: "circ.inOut" }, 0.95);
+        tl.from("#co-disclaimer", { opacity: 0, y: 12, duration: 0.4, ease: "power1.out" }, 1.2);
+        // PLEASE STAND BY blinks on the timeline, never on a wall clock.
+        tl.to("#co-standby", {
+          opacity: 0.2,
+          duration: 0.4,
+          repeat: Math.max(1, Math.floor(4.5 / 0.8) - 1),
+          yoyo: true,
+          ease: "steps(1)",
+        }, 1.5);
+        window.__timelines["cold-open-1"] = tl;
+      })();
+    </script>
+  </div>
+</template>

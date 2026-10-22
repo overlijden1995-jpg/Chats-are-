@@ -36,7 +36,10 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["introduction", "quickstart"]
+            "pages": [
+              "introduction",
+              "quickstart"
+            ]
           },
           {
             "group": "Concepts",
@@ -52,6 +55,7 @@
             "pages": [
               "guides/gsap-animation",
               "guides/templates",
+              "guides/cfr-cartoon-workflow",
               "guides/rendering",
               "guides/common-mistakes",
               "guides/troubleshooting"
@@ -79,11 +83,16 @@
         "groups": [
           {
             "group": "Reference",
-            "pages": ["reference/html-schema"]
+            "pages": [
+              "reference/html-schema"
+            ]
           },
           {
             "group": "Contributing",
-            "pages": ["contributing", "contributing/testing-local-changes"]
+            "pages": [
+              "contributing",
+              "contributing/testing-local-changes"
+            ]
           }
         ]
       }

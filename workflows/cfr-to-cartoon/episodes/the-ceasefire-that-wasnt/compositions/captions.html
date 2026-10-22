@@ -1,0 +1,58 @@
+<template id="captions-template">
+  <div data-hf-id="hf-flkj"
+    data-composition-id="captions"
+    data-timeline-role="captions"
+    data-caption-root="true"
+    data-width="1920"
+    data-height="1080"
+    style="position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; background: transparent;"
+  >
+    <div data-hf-id="hf-h580" id="cap-root">
+      <div data-hf-id="hf-77mk" class="cap-line" id="cap-line-1"><span data-hf-id="hf-c5he" class="cap-speaker">ANCHOR</span>Good evening. The war is on schedule.</div>
+      <div data-hf-id="hf-d8pg" class="cap-line" id="cap-line-2"><span data-hf-id="hf-mgbq" class="cap-speaker">ANCHOR</span>The stabilization is proceeding exactly as unplanned.</div>
+      <div data-hf-id="hf-oyl1" class="cap-line" id="cap-line-3"><span data-hf-id="hf-mumr" class="cap-speaker">ANCHOR</span>Officials describe the operation as special, and stabilization as ongoing.</div>
+      <div data-hf-id="hf-g0pq" class="cap-line" id="cap-line-4"><span data-hf-id="hf-n8xs" class="cap-speaker">ANCHOR</span>Both descriptions have been approved for broadcast.</div>
+      <div data-hf-id="hf-r24v" class="cap-line" id="cap-line-5">The situation is unchanged. It has merely changed 1,140 times.</div>
+      <div data-hf-id="hf-tx4e" class="cap-line" id="cap-line-6"><span data-hf-id="hf-913u" class="cap-speaker">LEDGER</span>4.2 million people require humanitarian assistance.</div>
+      <div data-hf-id="hf-nvbn" class="cap-line" id="cap-line-7"><span data-hf-id="hf-gwla" class="cap-speaker">LEDGER</span>Aid convoys: 38 per month.</div>
+      <div data-hf-id="hf-ku97" class="cap-line" id="cap-line-8"><span data-hf-id="hf-hawb" class="cap-speaker">LEDGER</span>Reconstruction funds disbursed: 6 percent.</div>
+      <div data-hf-id="hf-r5b5" class="cap-line" id="cap-line-9"><span data-hf-id="hf-dqxc" class="cap-speaker">CLERK</span>The ceasefire has been approved for expiry.</div>
+      <div data-hf-id="hf-5uck" class="cap-line" id="cap-line-10"><span data-hf-id="hf-fnfs" class="cap-speaker">CLERK</span>In triplicate. File copy destroyed after reading.</div>
+      <div data-hf-id="hf-n1gj" class="cap-line" id="cap-line-11"><span data-hf-id="hf-kgsl" class="cap-speaker">ANCHOR</span>The facts above are real. The Ministry is not.</div>
+    </div>
+
+    <style>
+      [data-composition-id="captions"] #cap-root {
+        position: absolute; left: 0; right: 0; bottom: 46px; height: 120px;
+      }
+      [data-composition-id="captions"] .cap-line {
+        position: absolute; left: 50%; bottom: 0; width: 1560px;
+        margin-left: -780px; text-align: center; opacity: 0;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 30px; line-height: 1.35; color: #e8dfc8;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 2px #0b0a08;
+      }
+      [data-composition-id="captions"] .cap-speaker {
+        color: #8c6a2f; letter-spacing: 0.14em; margin-right: 12px;
+      }
+      [data-composition-id="captions"] .cap-euph {
+        color: #a31616;
+      }
+    </style>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        const cues = [[0.35, 4.25], [4.85, 7.88], [7.88, 12.22], [12.22, 15.25], [15.85, 25.25], [25.85, 30.12], [30.12, 33.69], [33.69, 37.25], [37.85, 41.55], [41.55, 45.25], [45.85, 52.25]];
+        for (let i = 0; i < cues.length; i++) {
+          const el = document.getElementById("cap-line-" + (i + 1));
+          if (!el) continue;
+          tl.set(el, { opacity: 1 }, cues[i][0]);
+          tl.set(el, { opacity: 0 }, cues[i][1]);
+        }
+        window.__timelines["captions"] = tl;
+      })();
+    </script>
+  </div>
+</template>
